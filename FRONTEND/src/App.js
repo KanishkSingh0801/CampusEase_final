@@ -109,7 +109,7 @@ function App() {
             element={
               <AdminDashboardHallAvailability data={"hall_availability"} />
             }
-          />
+          /> 
           <Route
             path="/admin/dashboard/hall_listing"
             element={

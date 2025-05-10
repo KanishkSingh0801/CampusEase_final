@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/KanishkSingh0801/CampusEase#readme",
   "dependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "mongodb": "^6.16.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
