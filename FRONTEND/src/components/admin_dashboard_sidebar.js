@@ -6,6 +6,8 @@ import message_icon_grey from "../assets/message_icon_grey.png";
 import message_icon_white from "../assets/message_icon_white.png";
 import logout_icon_grey from "../assets/logout_icon_grey.png";
 import profile from "../assets/admin_profile_icon.png";
+import hall_icon_grey from "../assets/hall_icon_grey.png";
+import hall_icon_white from "../assets/hall_icon_white.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -67,7 +69,22 @@ function AdminDashboardSidebar(props) {
               className="h-5 w-5 mr-2"
               alt="hall-icon"
             />
-            <div>Hall Availability</div>
+            <div>Resource Calendar</div>
+          </div>
+        </a>
+
+        <a
+          className="block text-gray-600 py-2.5 px-4 my-2 rounded-md transition-all hover:bg-blue-100 hover:text-blue-600"
+          style={props.data === "hall_listing" ? activeStyle : {}}
+          href="/admin/dashboard/hall_listing"
+        >
+          <div className="flex items-center">
+            <img
+              src={props.data === "hall_listing" ? hall_icon_white : hall_icon_grey}
+              className="h-5 w-5 mr-2"
+              alt="hall-icon"
+            />
+            <div>Facilities</div>
           </div>
         </a>
 

@@ -18,9 +18,9 @@ const connect = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("MONGO URI:", process.env.MONGO);
+    // console.log("MONGO URI:", process.env.MONGO);
 
-    console.log("Connection est.");
+    console.log("Connection with mongodb database est.");
   } catch (error) {
     console.log("Connection failed");
   }

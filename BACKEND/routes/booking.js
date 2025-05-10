@@ -24,7 +24,7 @@ router.get("/availableslots", getAvailableTimes);
 router.get("/userBookings", protectUserRoutes, getUserBookings);
 
 // GET ALL BOOKINGS (Now Protected)
-router.get("/allBookings", protectUserRoutes, getAllBookings);
+router.get("/allBookings", protectAdminRoutes, getAllBookings);
 
 // User Verification Route
 router.get("/verifyuser", verifyuser);

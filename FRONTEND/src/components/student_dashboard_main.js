@@ -7,7 +7,7 @@ function StudentDashboardMain() {
         <div className="md:w-1/2 flex flex-col">
           {/* Title */}
           <div className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-500 text-transparent bg-clip-text">
-            HALLS BOOKING
+            RESOURCES BOOKING
           </div>
 
           {/* Hall Availability Link */}
@@ -17,12 +17,12 @@ function StudentDashboardMain() {
               href="/student/dashboard/hall_availability"
             >
               Click here
-            </a> to check the availability of halls.
+            </a> to check the availability of resources.
           </div>
 
           {/* Hall List Box */}
           <div className="bg-white shadow-md rounded-xl p-6 h-full flex flex-col">
-            <div className="text-lg font-semibold mb-4">Available Halls:</div>
+            <div className="text-lg font-semibold mb-4">Available Resources:</div>
             <ol className="list-decimal ml-5 mt-5 text-lg text-gray-700 leading-loose space-y-3">
             {[
               { name: "Silveria", icon: "🏛️" },
@@ -54,11 +54,11 @@ function StudentDashboardMain() {
              
               <li>
                 <i className="fa-solid fa-calendar-check text-blue-700 mr-2"></i>
-                Check the calendar in Hall Availability for availability of the resources on specific dates.
+                Check the Resource Calendar for availability of the resources on specific dates.
               </li>
               <li>
                 <i className="fa-solid fa-pen-to-square text-blue-700 mr-2"></i>
-                Click "Book Hall" and fill in the form and submit.
+                Click "Book Now" and fill in the form and submit.
               </li>
               <li>
                 <i className="fa-solid fa-envelope text-blue-700 mr-2"></i>

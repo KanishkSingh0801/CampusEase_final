@@ -26,6 +26,17 @@ const studentSchema = new mongoose.Schema(
       type: "String",
       required: true,
     },
+
+
+    userType: {
+      type: String,
+      enum: ['student', 'faculty', 'visitor'],
+      required: true
+    },
+    userId: {
+      type: String,
+      default: null  // if visitor, will remain null
+    }
   },
   { timestamps: true }
 );

@@ -7,7 +7,7 @@ function AdminDashboardMain() {
         <div className="md:w-1/2 flex flex-col">
           {/* Title */}
           <div className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-600 to-orange-500 text-transparent bg-clip-text">
-            HALLS MANAGEMENT
+            RESOURCE MANAGEMENT
           </div>
 
           {/* Pending Requests Link */}
@@ -23,7 +23,7 @@ function AdminDashboardMain() {
 
           {/* Halls Assigned Box */}
           <div className="bg-white shadow-md rounded-xl p-6 h-full flex flex-col">
-            <div className="text-lg font-semibold mb-4">Assigned Halls:</div>
+            <div className="text-lg font-semibold mb-4">Assigned  Resources:</div>
             <ol className="list-decimal ml-5 mt-5 text-lg text-gray-700 leading-loose space-y-3">
               {[
                 { name: "Silveria", icon: "🏛️" },
@@ -54,7 +54,7 @@ function AdminDashboardMain() {
             <ul className="list-none ml-5 mt-5 space-y-3 text-gray-800">
               <li>
                 <i className="fa-solid fa-calendar-check text-red-700 mr-2"></i>
-                Check the calendar for hall availability.
+                Check the  resource calendar for  availability.
               </li>
               <li>
                 <i className="fa-solid fa-file-alt text-red-700 mr-2"></i>

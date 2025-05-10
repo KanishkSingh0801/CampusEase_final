@@ -18,7 +18,7 @@ function RegisterCenterContent() {
   const [passwordError, setPasswordError] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // const [User_Name, setUser_Name] = useState("");
+
 
   const [Contact_Number, setContactNumber] = useState();
   const [numberError, setNumberError] = useState(false);
@@ -32,6 +32,28 @@ function RegisterCenterContent() {
   
   const [userExistbyContact, setUserExistbyContact]= useState();
   
+
+
+
+
+  // something new coming up
+  const [userType, setUserType] = useState('');
+const [idVerification, setIdVerification] = useState('');
+
+
+
+
+const [isVerifying, setIsVerifying] = useState(false);
+const [isVerified, setIsVerified] = useState(false);
+const [verificationMsg, setVerificationMsg] = useState('');
+
+
+
+
+
+
+
+
   const navigate = useNavigate();
 
 
@@ -127,14 +149,79 @@ function RegisterCenterContent() {
 // };
 
 
+
+const handleVerifyID = async () => {
+  if (userType === 'visitor') {
+    setIsVerified(true);
+    setVerificationMsg('No verification needed for visitors.');
+    return;
+  }
+
+  if (!userType || !idVerification) {
+    alert('Please select a user type and enter the ID.');
+    return;
+  }
+
+  setIsVerifying(true);
+  setVerificationMsg('');
+
+  try {
+    // const response = await axios.get(`http://localhost:3001/api/auth/verifyuser`, {
+    const response = await axios.get(`https://campusease-final.onrender.com/api/auth/verifyuser`, {
+      params: { id: idVerification, type: userType, name: Applicant_Name },
+      validateStatus: function (status) {
+        // Accept all responses so we can handle manually
+        return true;
+      },
+    });
+
+    if (response.status === 200 && response.data.verified) {
+      setIsVerified(true);
+      setVerificationMsg(`Verified: ${response.data.name}`);
+      // console.log(response.data.name);
+      // console.log(response.data.message);
+
+    } else {
+      // console.log("idhar aao");
+      
+      setIsVerified(false);
+      // setVerificationMsg('Verification failed. Please check your details.');
+      setVerificationMsg(`Not Verified: ${response.data.message}`);
+    }
+  } catch (error) {
+    console.error('Error verifying user:', error);
+    setIsVerified(false);
+    setVerificationMsg('Verification error. Please try again.');
+
+  } finally {
+    setIsVerifying(false);
+  }
+};
+
+
+
+
+
   const handleRegister = async (e) => {
+
+// Check native form validation first
+const form = e.target;
+if (!form.checkValidity()) {
+  return; // Let browser show the required field warning
+}
+
+
+
+
+
     e.preventDefault();
 
-    // if (!isValid) {
-    //   setRegisterError("Please verify your username before registering.");
-    //   setTimeout(() => setRegisterError(""), 3000);
-    //   return;
-    // }
+
+
+    if ((userType === 'student' || userType === 'faculty') && !isVerified) {
+      alert("Please verify your ID first.");
+      return;
+    }
 
     if (Password === confirmPassword) {
       const data = {
@@ -142,6 +229,8 @@ function RegisterCenterContent() {
         Applicant_Name,
         Password,
         Email,
+        userType,
+        userId: userType === 'visitor' ? null : idVerification
       };
 
 
@@ -150,7 +239,8 @@ function RegisterCenterContent() {
         console.log("hello");
         
         const response = await fetch(
-          "http://localhost:3001/api/auth/register",
+          "https://campusease-final.onrender.com/api/auth/register",
+          // "http://localhost:3001/api/auth/register",
           {
             method: "POST",
             headers: {
@@ -239,7 +329,6 @@ function RegisterCenterContent() {
                   Contact Number
                 </label>
                 <input
-                  // type="text"
                   type="tel"
                   name="contact"
                   pattern="[0-9]{10}"
@@ -305,6 +394,79 @@ function RegisterCenterContent() {
                   </div>
                 </div>
               )}
+
+              {/*  something new coming up */}
+              <div>
+  <label className="block mb-2 text-sm font-medium text-gray-900">
+    You are a:
+  </label>
+  <select
+    value={userType}
+    // onChange={(e) => {setUserType(e.target.value);
+      
+    // //   setId("");              // Clear ID input
+    // // setIsVerified(false);  // Reset verification
+    // }}
+    onChange={(e) => {
+      const selectedType = e.target.value;
+      setUserType(selectedType);
+      setIdVerification('');              // Clear ID input
+      setIsVerified(false);  // Reset verification
+      setVerificationMsg('');
+    }}
+    className="bg-neutral-100 text-gray-900 sm:text-sm rounded-sm block w-full h-10 p-2.5"
+    required
+  >
+    <option value="">Select your role </option>
+    <option value="student">Student</option>
+    <option value="faculty">Faculty</option>
+    <option value="visitor">Visitor</option>
+  </select>
+</div>
+
+{(userType === 'student' || userType === 'faculty') && (
+  <div className="mt-4">
+    <label className="block mb-2 text-sm font-medium text-gray-900">
+      {userType.charAt(0).toUpperCase() + userType.slice(1)} ID Verification
+    </label>
+    <div className="flex items-center gap-2">
+      <input
+        type="text"
+        value={idVerification}
+        onChange={(e) => {
+          setIdVerification(e.target.value);
+          setIsVerified(false);
+          setVerificationMsg('');
+        }}
+        placeholder={`Enter your ${userType} ID`}
+        className="bg-neutral-100 text-gray-900 sm:text-sm rounded-sm block w-full h-10 p-2.5"
+        required
+      />
+      <button
+        type="button"
+        onClick={handleVerifyID}
+        disabled={isVerified || isVerifying || !idVerification}
+        className={`text-sm font-medium ${
+          isVerified ? 'text-green-600' : 'text-blue-600 hover:underline'
+        }`}
+      >
+        {isVerified ? 'Verified' : isVerifying ? 'Verifying...' : 'Verify'}
+      </button>
+    </div>
+    {verificationMsg && (
+      <p className={`text-sm mt-1 ${isVerified ? 'text-green-600' : 'text-red-600'}`}>
+        {verificationMsg}
+      </p>
+    )}
+  </div>
+)}
+
+
+
+
+
+
+
               <div className="relative">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">
                   Password
@@ -403,12 +565,13 @@ function RegisterCenterContent() {
               
               <button
                 type="submit"
-                onClick={handleRegister}
+                // onClick={handleRegister}
                 className="w-full text-white bg-sky-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-sm text-sm px-5 py-2.5 text-center"
                 // disabled={!isValid}
               >
                 Register
               </button>
+             
               {registerError && <p className="text-xs text-red-500 mt-2">{registerError}</p>}
             </form>
           </div>

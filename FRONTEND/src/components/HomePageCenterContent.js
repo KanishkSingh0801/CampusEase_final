@@ -50,7 +50,7 @@ function HomePageCenterContent() {
               <li className="flex items-center">
                 <i className="fa-solid fa-right-to-bracket text-blue-700 mr-2"></i>
                 <a className="text-blue-700 hover:underline hover:cursor-pointer font-semibold" href="/login">
-                  Click here
+                  Click here 
                 </a> to login
               </li>
               <li className="flex items-center">

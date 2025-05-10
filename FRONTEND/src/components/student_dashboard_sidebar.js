@@ -30,8 +30,8 @@ function StudentDashboardSidebar({ data, changeRefreshState }) {
 
   const menuItems = [
     { name: "Dashboard", key: "dashboard", icon: dashboard_icon_grey, activeIcon: dashboard_icon_white, path: "/student/dashboard" },
-    { name: "Hall Availability", key: "hall_availability", icon: calendar_icon_grey, activeIcon: calendar_icon_white, path: "/student/dashboard/hall_availability" },
-    { name: "Hall Booking", key: "hall_booking", icon: hall_icon_grey, activeIcon: hall_icon_white, path: "/student/dashboard/hall_booking" },
+    { name: "Resource Calendar", key: "hall_availability", icon: calendar_icon_grey, activeIcon: calendar_icon_white, path: "/student/dashboard/hall_availability" },
+    { name: "Resource Booking", key: "hall_booking", icon: hall_icon_grey, activeIcon: hall_icon_white, path: "/student/dashboard/hall_booking" },
     { name: "Booking Status", key: "pending_requests", icon: message_icon_grey, activeIcon: message_icon_white, path: "/student/dashboard/pending_requests" },
   ];
 

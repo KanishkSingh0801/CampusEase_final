@@ -32,7 +32,7 @@ function HomePageHeader() {
             </li>
             <li>
               <a href="/hall_details" className="hover:underline hover:text-yellow-400">
-                HALL DETAILS
+                Facilities
               </a>
             </li>
             <li>

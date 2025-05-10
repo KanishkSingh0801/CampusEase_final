@@ -9,7 +9,8 @@ function AdminPendingRequests(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/booking/adminBookings", {
+        // const response = await fetch("http://localhost:3001/api/booking/adminBookings", {
+        const response = await fetch("https://campusease-final.onrender.com/api/booking/adminBookings", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +54,7 @@ function AdminPendingRequests(props) {
         hour12: true,
     });
   };
-
+ 
 
   const filteredBookings =
     selectedStatus === "all"
@@ -65,9 +66,9 @@ function AdminPendingRequests(props) {
       case "rejected":
         return "bg-red-500 hover:bg-red-600 text-white";
       case "approved":
-        return "bg-green-500 hover:bg-green-600 text-white cursor-pointer";
-      case "pending":
         return "bg-yellow-500 hover:bg-yellow-600 text-white";
+      case "paymentDone":
+        return "bg-green-500 hover:bg-green-600 text-white";
       default:
         return "bg-gray-200 text-gray-800";
     }
@@ -75,7 +76,8 @@ function AdminPendingRequests(props) {
 
   const handleStatusUpdate = async (bookingId, newStatus) => {
     try {
-      const response = await fetch("http://localhost:3001/api/booking/updateBooking", {
+      // const response = await fetch("http://localhost:3001/api/booking/updateBooking", {
+      const response = await fetch("https://campusease-final.onrender.com/api/booking/updateBooking", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

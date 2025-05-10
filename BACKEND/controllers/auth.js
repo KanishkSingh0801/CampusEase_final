@@ -4,13 +4,70 @@ import { generateToken } from "../config/genrateToken.js";
 import bcrypt from "bcryptjs";
 import sendEmail from "../utils/sendEmail.js"; //  Import email function
 
+
+import student from "../models/CollegeStudentModel.js";
+import faculty from "../models/FacultyModel.js";
+
+export const verifyuser = async (req, res) => {
+  try {
+    const { id, type, name } = req.query;
+
+    if (!id || !type || !name) {
+      return res.status(400).json({ success: false, message: "Missing user ID, name, or type" });
+    }
+
+    console.log("ID:", id);
+    console.log("Type:", type);
+    console.log("Name:", name);
+
+    let user;
+
+    if (type === "student") {
+      user = await student.findOne({ student_id: id, student_name: { $regex: new RegExp(`^${name}$`, "i") } });
+      console.log("me hu  student");
+    } else if (type === "faculty") {
+      user = await faculty.findOne({ faculty_id: id, faculty_name: { $regex: new RegExp(`^${name}$`, "i") } });
+      console.log("me hu  faculty");
+    } else {
+      return res.status(400).json({ success: false, message: "Invalid user type" });
+    }
+    // console.log("i m   stu");
+    // console.log(user);
+    
+    if (user) {
+      console.log(name);
+      return res.status(200).json({
+        verified: true,
+        message: "User verified",
+        name: name,
+        
+      });
+    } else {
+      // console.log("hhhhhhhh");
+      
+      return res.status(404).json({
+        verified: false,
+        message: "ID and name do not match or user not found",
+      });
+    }
+
+  } catch (error) {
+    console.error("Error in verification:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+
+
+
 export const registerUser = asyncHandler(async (req, res) => {
   console.log("🔹 Register API called");
   console.log("Request Body:", req.body);
 
-  const { Contact_Number, Applicant_Name, Password, Email } = req.body;
+  const { Contact_Number, Applicant_Name, Password, Email, userType, userId } = req.body;
+  
 
-  if (!Applicant_Name || !Contact_Number || !Password || !Email) {
+  if (!Applicant_Name || !Contact_Number || !Password || !Email || !userId ||!userType) {
     console.log(" Missing required fields");
     return res.status(400).json({ msg: "Please fill all required fields." });
   }
@@ -54,6 +111,8 @@ export const registerUser = asyncHandler(async (req, res) => {
     Applicant_Name,
     Email,
     Password: secpass,
+    userType,
+    userId
   });
 
   console.log(" User Created Successfully:", user);
@@ -73,6 +132,8 @@ export const registerUser = asyncHandler(async (req, res) => {
       Contact_Number: user.Contact_Number,
       Applicant_Name: user.Applicant_Name,
       Email: user.Email,
+      userType: user.userType,
+      userId: user.userId,
       token: generateToken(user._id),
     });
   } else {
@@ -101,10 +162,11 @@ export const authUser = asyncHandler(async (req, res) => {
   //   $or: [{ Email: identifier }, { Contact_Number: identifier }],
   // });
 
-  const { identifier, Password } = req.body;
+  const { Email, Password } = req.body;
 
-  console.log("🔹 Login attempt for:", identifier);
-  const user = await User.findOne({ identifier });
+  console.log(`Email: ${Email}`);
+  console.log("🔹 Login attempt for:", Email);
+  const user = await User.findOne({ Email });
   console.log(user);
   
   if (!user) {
@@ -120,6 +182,8 @@ export const authUser = asyncHandler(async (req, res) => {
       Contact_Number: user.Contact_Number,
       Applicant_Name: user.Applicant_Name,
       Email: user.Email,
+      userType: user.userType,
+      userId: user.userId,
       token: generateToken(user._id),
     });
   } else {

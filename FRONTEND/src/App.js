@@ -12,10 +12,16 @@ import StudentDashboardHallAvailability from "./views/StudentDashboardHallAvaila
 import AdminDashboardMainPage from "./views/AdminDashboardMainPage";
 import AdminDashboardPendingRequests from "./views/AdminDashboardPendingRequests";
 import AdminDashboardHallAvailability from "./views/AdminDashboardHallAvailability";
+
+
+import AdminHallListingPage from "./views/AdminHallListingPage";
+
+
 import CalendarCom from "./components/calendar";
 import HallDetailMain from "./components/student_dashboard_hall_booking";
 import Admin_Login from "./components/Admin_Login";
 import CampusMap from "./components/CampusMap"; // Ensure the filename matches exactly
+
 
 function App() {
   const [refresh, setRefresh] = useState(false);
@@ -104,6 +110,13 @@ function App() {
               <AdminDashboardHallAvailability data={"hall_availability"} />
             }
           />
+          <Route
+            path="/admin/dashboard/hall_listing"
+            element={
+              <AdminHallListingPage data={"hall_listing"} />
+            }
+          />
+
           <Route path="/calendar" element={<CalendarCom />} />
           <Route path="/hall_details" element={<HallDetailMain />} />
           <Route path="/campus_map" element={<CampusMap />} />
