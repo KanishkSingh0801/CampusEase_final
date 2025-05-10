@@ -303,6 +303,8 @@ import { useEffect, useState, useRef } from "react";
 import { usePDF } from "react-to-pdf";
 import { FiDownloadCloud } from "react-icons/fi";
 import logo from "../assets/SGSITS_main_logo.png";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function StudentDashboardPendingRequests() {
   const [bookingData, setBookingData] = useState([]);
@@ -323,7 +325,8 @@ function StudentDashboardPendingRequests() {
       try {
         const response = await fetch(
           // "http://localhost:3001/api/booking/userBookings",
-          "https://campusease-final.onrender.com/api/booking/userBookings",
+          // "https://campusease-final.onrender.com/api/booking/userBookings",
+          `${BASE_URL}/api/booking/userBookings`,
           {
             method: "GET",
             headers: {
@@ -427,7 +430,8 @@ function StudentDashboardPendingRequests() {
   const handleProceedToPayment = async (bookingID) => {
     try {
       // const response = await fetch("http://localhost:3001/api/booking/updateBooking", {
-      const response = await fetch("https://campusease-final.onrender.com/api/booking/updateBooking", {
+      // const response = await fetch("https://campusease-final.onrender.com/api/booking/updateBooking", {
+      const response = await fetch(`${BASE_URL}/api/booking/updateBooking`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

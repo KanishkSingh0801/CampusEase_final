@@ -2,6 +2,8 @@ import email_id_input from "../assets/email_id_input.png";
 import password_input from "../assets/password_input.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function LoginCenterContent() {
   const navigate = useNavigate();
@@ -17,8 +19,9 @@ function LoginCenterContent() {
       Password,
     };
     const userData = await fetch(
+      `${BASE_URL}/api/auth/login`,
       // "http://localhost:3001/api/auth/login",
-      "https://campusease-final.onrender.com/api/auth/login",
+      // "https://campusease-final.onrender.com/api/auth/login",
       {
         method: "POST",
         headers: {
@@ -47,6 +50,7 @@ function LoginCenterContent() {
   };
   return (
     <div>
+       {/* console.log("API Base URL:", import.meta.env.REACT_APP_API_BASE_URL); */}
       <div className="flex flex-col items-center justify-center px-6 my-20">
         <div className="w-full bg-white rounded-lg shadow-xl dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

@@ -6,6 +6,9 @@ import StudentHallBookingNavbar from "./student_dashboard_navbar";
 import StudentHallBookingDetailsPage from "./student_dashboard_hall_details";
 import StudentHallBookingBookingForm from "./student_dashboard_booking_form";
 
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 function StudentDashboardHallBookingHallList() {
   const navigate = useNavigate();
   const [halls, setHalls] = useState([]);
@@ -19,8 +22,10 @@ function StudentDashboardHallBookingHallList() {
   useEffect(() => {
     // axios
     //   .get("http://localhost:3001/api/halls/getAllHalls")
+    // axios
+    //   .get("https://campusease-final.onrender.com/api/halls/getAllHalls")
     axios
-      .get("https://campusease-final.onrender.com/api/halls/getAllHalls")
+      .get(`${BASE_URL}/api/halls/getAllHalls`)
       .then((response) => setHalls(response.data))
       .catch((error) => console.error("Error fetching hall data:", error));
   }, [selectedCapacity]); //  Refetch when capacity changes

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function AdminPendingRequests(props) {
   const [bookingData, setBookingData] = useState([]);
@@ -9,8 +11,9 @@ function AdminPendingRequests(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await fetch("http://localhost:3001/api/booking/adminBookings", {
-        const response = await fetch("https://campusease-final.onrender.com/api/booking/adminBookings", {
+        //  const response = await fetch("http://localhost:3001/api/booking/adminBookings", {
+        const response = await fetch(`${BASE_URL}/api/booking/adminBookings`, {
+        // const response = await fetch("https://campusease-final.onrender.com/api/booking/adminBookings", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -76,8 +79,9 @@ function AdminPendingRequests(props) {
 
   const handleStatusUpdate = async (bookingId, newStatus) => {
     try {
+      const response = await fetch(`${BASE_URL}/api/booking/updateBooking`, {
       // const response = await fetch("http://localhost:3001/api/booking/updateBooking", {
-      const response = await fetch("https://campusease-final.onrender.com/api/booking/updateBooking", {
+      // const response = await fetch("https://campusease-final.onrender.com/api/booking/updateBooking", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function AdminShowHallDetail({ selectedHall }) {
   // console.log("hello");
@@ -26,8 +28,9 @@ function AdminShowHallDetail({ selectedHall }) {
 
   const handleSave = async () => {
     try {
+      await axios.put(`${BASE_URL}/api/halls/updateHall/${hallData._id}`, hallData); // adjust endpoint
       // await axios.put(`http://localhost:3001/api/halls/updateHall/${hallData._id}`, hallData); // adjust endpoint
-      await axios.put(`https://campusease-final.onrender.com/api/halls/updateHall/${hallData._id}`, hallData); // adjust endpoint
+      // await axios.put(`https://campusease-final.onrender.com/api/halls/updateHall/${hallData._id}`, hallData); // adjust endpoint
       setIsEditing(false);
       alert("Hall updated successfully");
     } catch (error) {

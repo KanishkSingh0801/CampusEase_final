@@ -3,6 +3,8 @@ import password_input from "../assets/password_input.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function Admin_Login() {
   const navigate = useNavigate();
@@ -15,8 +17,9 @@ function Admin_Login() {
     e.preventDefault();
     const data = { email, password };
 
+    const userData = await fetch(`${BASE_URL}/api/admin/login`, {
     // const userData = await fetch("http://localhost:3001/api/admin/login", {
-    const userData = await fetch("https://campusease-final.onrender.com/api/admin/login", {
+    // const userData = await fetch("https://campusease-final.onrender.com/api/admin/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

@@ -4,7 +4,8 @@ import axios from "axios";
 import PopupModal from "./popup_modal";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 function StudentDashboardHallBookingBookingForm({ selectedHall }) {
@@ -102,8 +103,10 @@ function StudentDashboardHallBookingBookingForm({ selectedHall }) {
     
     // axios
     // .get(`http://localhost:3001/api/halls?Hall_ID=${selectedHall.Hall_ID}`)
+    // axios
+    // .get(`https://campusease-final.onrender.com/api/halls?Hall_ID=${selectedHall.Hall_ID}`)
     axios
-    .get(`https://campusease-final.onrender.com/api/halls?Hall_ID=${selectedHall.Hall_ID}`)
+    .get(`${BASE_URL}/api/halls?Hall_ID=${selectedHall.Hall_ID}`)
       .then((response) => {
         setHalls(response.data);
         console.log(response.data);
@@ -150,8 +153,10 @@ function StudentDashboardHallBookingBookingForm({ selectedHall }) {
     // }
 
       const hallBooked = await fetch(
-        "https://campusease-final.onrender.com/api/booking/createBooking",
+        // "https://campusease-final.onrender.com/api/booking/createBooking",
         // "http://localhost:3001/api/booking/createBooking",
+
+        `${BASE_URL}/api/booking/createBooking`,
         {
           method: "POST",
           headers: {
@@ -202,8 +207,11 @@ function StudentDashboardHallBookingBookingForm({ selectedHall }) {
       // fetch(
       //   `http://localhost:3001/api/booking/availableslots?hallname=${selectedHall.Hall_Name}&date=${selectedDate}`
       // )
+      // fetch(
+      //   `https://campusease-final.onrender.com/api/booking/availableslots?hallname=${selectedHall.Hall_Name}&date=${selectedDate}`
+      // )
       fetch(
-        `https://campusease-final.onrender.com/api/booking/availableslots?hallname=${selectedHall.Hall_Name}&date=${selectedDate}`
+        `${BASE_URL}/api/booking/availableslots?hallname=${selectedHall.Hall_Name}&date=${selectedDate}`
       )
         .then((response) => response.json())
         .then((data) => {

@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import AdminShowHallDetail from "./admin_show_hall_detail";
 import StudentHallBookingNavbar from "./student_dashboard_navbar";
 import { FaTrash } from 'react-icons/fa';
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function AdminHallList(props) {
   const [halls, setHalls] = useState([]);
@@ -14,8 +16,9 @@ function AdminHallList(props) {
 
   useEffect(() => {
     axios
+      .get(`${BASE_URL}/api/halls/getAllHalls`)
       // .get("http://localhost:3001/api/halls/getAllHalls")
-      .get("https://campusease-final.onrender.com/api/halls/getAllHalls")
+      // .get("https://campusease-final.onrender.com/api/halls/getAllHalls")
       .then((response) => setHalls(response.data))
       .catch((error) => console.error("Error fetching hall data:", error));
   }, [halls]);
@@ -77,8 +80,9 @@ function AdminHallList(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const response = await fetch(`${BASE_URL}/api/halls/addAHall`, {
+      // const response = await fetch("https://campusease-final.onrender.com/api/halls/addAHall", {
       // const response = await fetch("http://localhost:3001/api/halls/addAHall", {
-      const response = await fetch("https://campusease-final.onrender.com/api/halls/addAHall", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

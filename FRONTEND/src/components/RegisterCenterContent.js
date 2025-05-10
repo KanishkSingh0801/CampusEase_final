@@ -6,6 +6,8 @@ import password_input from "../assets/password_input.png";
 import { useNavigate } from "react-router-dom";
 import { FaInfoCircle, FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
+// const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   
 function RegisterCenterContent() {
@@ -166,8 +168,9 @@ const handleVerifyID = async () => {
   setVerificationMsg('');
 
   try {
+    const response = await axios.get(`${BASE_URL}/api/auth/verifyuser`, {
     // const response = await axios.get(`http://localhost:3001/api/auth/verifyuser`, {
-    const response = await axios.get(`https://campusease-final.onrender.com/api/auth/verifyuser`, {
+    // const response = await axios.get(`https://campusease-final.onrender.com/api/auth/verifyuser`, {
       params: { id: idVerification, type: userType, name: Applicant_Name },
       validateStatus: function (status) {
         // Accept all responses so we can handle manually
@@ -239,8 +242,9 @@ if (!form.checkValidity()) {
         console.log("hello");
         
         const response = await fetch(
-          "https://campusease-final.onrender.com/api/auth/register",
+          // "https://campusease-final.onrender.com/api/auth/register",
           // "http://localhost:3001/api/auth/register",
+          `${BASE_URL}/api/auth/register`,
           {
             method: "POST",
             headers: {
