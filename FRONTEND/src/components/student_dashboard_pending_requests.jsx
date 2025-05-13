@@ -304,7 +304,8 @@ import { usePDF } from "react-to-pdf";
 import { FiDownloadCloud } from "react-icons/fi";
 import logo from "../assets/SGSITS_main_logo.png";
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function StudentDashboardPendingRequests() {
   const [bookingData, setBookingData] = useState([]);

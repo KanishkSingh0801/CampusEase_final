@@ -7,7 +7,8 @@ import StudentHallBookingDetailsPage from "./student_dashboard_hall_details";
 import StudentHallBookingBookingForm from "./student_dashboard_booking_form";
 
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function StudentDashboardHallBookingHallList() {
   const navigate = useNavigate();

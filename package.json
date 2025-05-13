@@ -4,7 +4,7 @@
   "description": "This project enables college resources to be booked online.",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\""
+    "start": "concurrently \"npm run start --prefix backend\" \"npm run dev --prefix frontend\""
   },
   "repository": {
     "type": "git",

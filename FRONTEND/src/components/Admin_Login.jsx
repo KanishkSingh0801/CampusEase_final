@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Admin_Login() {
   const navigate = useNavigate();

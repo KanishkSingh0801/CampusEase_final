@@ -4,7 +4,8 @@ import AdminShowHallDetail from "./admin_show_hall_detail";
 import StudentHallBookingNavbar from "./student_dashboard_navbar";
 import { FaTrash } from 'react-icons/fa';
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function AdminHallList(props) {
   const [halls, setHalls] = useState([]);
@@ -39,7 +40,8 @@ function AdminHallList(props) {
       
       // await axios.delete(`http://localhost:3001/api/halls/deleteHall/${hallId}`);
       
-      await axios.delete(`https://campusease-final.onrender.com/api/halls/deleteHall/${hallId}`);
+      // await axios.delete(`https://campusease-final.onrender.com/api/halls/deleteHall/${hallId}`);
+      await axios.delete(`${BASE_URL}/api/halls/deleteHall/${hallId}`);
       console.log("hello");
       alert("Hall deleted successfully");
       // optionally, refresh the halls list

@@ -67,7 +67,8 @@ export const registerUser = asyncHandler(async (req, res) => {
   const { Contact_Number, Applicant_Name, Password, Email, userType, userId } = req.body;
   
 
-  if (!Applicant_Name || !Contact_Number || !Password || !Email || !userId ||!userType) {
+  // if (!Applicant_Name || !Contact_Number || !Password || !Email || !userId ||!userType) {
+  if (!Applicant_Name || !Contact_Number || !Password || !Email ||!userType) {
     console.log(" Missing required fields");
     return res.status(400).json({ msg: "Please fill all required fields." });
   }

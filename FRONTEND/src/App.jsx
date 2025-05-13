@@ -23,6 +23,11 @@ import Admin_Login from "./components/Admin_Login";
 import CampusMap from "./components/CampusMap"; // Ensure the filename matches exactly
 
 
+
+// import './index.css'; // Move this into App.jsx temporarily
+
+
+
 function App() {
   const [refresh, setRefresh] = useState(false);
 
@@ -45,8 +50,10 @@ function App() {
   }, [refresh]);
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <div className="flex flex-col min-h-screen">
+      {/* <div className="text-2xl text-red-600 font-bold">Hello Tailwind</div> */}
+
         <Header data={{ flag: isHeader() }} />
         <Routes>
           <Route path="/" element={<HomePageCenterContent />} />
@@ -54,7 +61,7 @@ function App() {
           <Route path="/login" element={<LoginCenterContent />} />
           <Route path="/register" element={<RegisterCenterContent />} />
           <Route
-            path="/student/dashboard"
+            path="/student/dashboard" 
             element={
               <StudentDashboardMainPage
                 data={"dashboard"}
@@ -123,7 +130,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </BrowserRouter>
+    // </BrowserRouter>
   );
 }
 

@@ -3,7 +3,9 @@ import password_input from "../assets/password_input.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 function LoginCenterContent() {
   const navigate = useNavigate();

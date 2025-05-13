@@ -4,8 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { useEffect, useState } from "react";
 import axios from "axios";
 // const BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
-const BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
+// const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function CalendarCom() {
   const [events, setEvents] = useState([]);
 
