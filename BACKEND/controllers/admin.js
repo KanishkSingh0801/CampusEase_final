@@ -39,6 +39,7 @@ export const registerAdmin = asyncHandler(async (req, res) => {
 });
 
 export const authAdmin = asyncHandler(async (req, res) => {
+  console.log("Incoming Body:", req.body); // ADD THIS
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   const passwordCompare = await bcrypt.compare(password, user.password);

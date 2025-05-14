@@ -1,24 +1,33 @@
 import express from "express";
-import { createHall, getAllHalls, getHall, updateHall, addAHall, deleteHall } from "../controllers/halls.js";
+import {
+  createHall,
+  getAllHalls,
+  getHall,
+  updateHall,
+  addAHall,
+  deleteHall,
+} from "../controllers/halls.js";
 import { protectUserRoutes } from "../middleware/authmiddleware.js";
 import { protectAdminRoutes } from "../middleware/adminVerify.js";
 
 const router = express.Router();
 
-//CREATE
+// CREATE Hall - Admin only
 router.post("/", protectAdminRoutes, createHall);
 
-//GET Hall
+// GET Hall - No protection, publicly accessible
 router.get("/", getHall);
 
-//GET ALL
-router.get("/getAllHalls", getAllHalls);
+// GET ALL Halls - Admin only
+router.get("/getAllHalls", protectAdminRoutes, getAllHalls);
 
-router.put("/updateHall/:id", updateHall); // ID in URL
+// UPDATE Hall - Admin only
+router.put("/updateHall/:id", protectAdminRoutes, updateHall);
 
-router.post("/addAHall", addAHall);
+// ADD Hall - Admin only
+router.post("/addAHall", protectAdminRoutes, addAHall);
 
-router.delete('/deleteHall/:id', deleteHall);
-
+// DELETE Hall - Admin only
+router.delete('/deleteHall/:id', protectAdminRoutes, deleteHall);
 
 export default router;

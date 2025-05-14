@@ -8,7 +8,7 @@ import {
   getBooking,
   getUserBookings,
   updateBooking,
-  verifyuser
+  verifyuser,
 } from "../controllers/booking.js";
 import { protectUserRoutes } from "../middleware/authmiddleware.js";
 import { protectAdminRoutes } from "../middleware/adminVerify.js";
@@ -23,19 +23,17 @@ router.get("/availableslots", getAvailableTimes);
 // GET User Bookings (Protected)
 router.get("/userBookings", protectUserRoutes, getUserBookings);
 
-// GET ALL BOOKINGS (Now Protected)
-router.get("/allBookings", protectAdminRoutes, getAllBookings);
+// GET Booking by ID (Protected)
+router.get("/:id", protectUserRoutes, getBooking);
+
+// Admin Routes (Protected)
+router.post("/createBooking", protectAdminRoutes, createBooking); // Only admin can create bookings
+router.get("/allBookings", protectAdminRoutes, getAllBookings); // Only admin can view all bookings
+router.get("/adminBookings", protectAdminRoutes, getAdminBookings); // Only admin can view admin bookings
+router.delete("/deleteBooking", protectAdminRoutes, deleteBooking); // Only admin can delete bookings
+router.patch("/updateBooking", protectAdminRoutes, updateBooking); // Only admin can update bookings
 
 // User Verification Route
 router.get("/verifyuser", verifyuser);
-
-// Admin Routes
-router.post("/createBooking", protectUserRoutes, createBooking);
-router.get("/adminBookings", protectAdminRoutes, getAdminBookings);
-router.delete("/deleteBooking", protectAdminRoutes, deleteBooking);
-router.patch("/updateBooking", protectAdminRoutes, updateBooking);
-
-// GET Booking by ID (Protected)
-router.get("/:id", protectUserRoutes, getBooking);
 
 export default router;
