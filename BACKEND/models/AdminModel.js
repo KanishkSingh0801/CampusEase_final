@@ -3,29 +3,33 @@ import mongoose from "mongoose";
 const adminSchema = new mongoose.Schema(
   {
     adminId: {
-      type: "Number",
+      type: Number,
       required: true,
       unique: true,
     },
     adminName: {
-      type: "String",
+      type: String,
       required: true,
     },
     department: {
-      type: "String",
+      type: String,
       required: true,
     },
     email: {
-      type: "String",
+      type: String,
       required: true,
       unique: true,
     },
     password: {
-      type: "String",
+      type: String,
       required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: true, // make sure all users from this schema are admins
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("admin", adminSchema);
+export default mongoose.model("Admin", adminSchema);
