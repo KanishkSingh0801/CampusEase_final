@@ -126,7 +126,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     // const emailBody = `Hello ${Applicant_Name},\n\nThank you for registering! Your username is: ${User_Name}.\n\nBest Regards,\nTeam CampusEase`;
     const emailBody = `Hello ${Applicant_Name},\n\nThank you for registering!\n\nBest Regards,\nTeam CampusEase`;
 
-    await sendEmail(Email, emailSubject, emailBody);
+    // await sendEmail(Email, emailSubject, emailBody); //temporarily commented out
 
     res.status(201).json({
       _id: user._id,

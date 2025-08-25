@@ -71,10 +71,11 @@ export const createBooking = async (req, res) => {
       <p>Regards,<br><b>CampusEase Team</b></p>
     `;
 
-    await sendEmail(req.user.Email, "Booking Request Submitted ✅", emailContent);
+    // await sendEmail(req.user.Email, "Booking Request Submitted ✅", emailContent); // email issue- temporarily commented out
 
     res.status(200).json(savedBooking);
   } catch (err) {
+    console.error("Error creating booking:", err);
     res.status(400).json({
       status: "Failed",
       message: err,
@@ -160,6 +161,8 @@ export const getAdminBookings = async (req, res) => {
 
     res.status(200).json(halls);
   } catch (err) {
+    console.log("Error fetching admin bookings:", err);
+
     res.status(400).json({
       status: "Failed",
       message: err,

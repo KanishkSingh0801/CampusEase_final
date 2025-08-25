@@ -14,21 +14,7 @@ export const createHall = async (req, res) => {
     }
 }
 
-//Get Hall by ID
 
-// export const getHall = async (req, res) => {
-//     try {
-//         const { Hall_ID } = req.body;
-//         if (!Hall_ID) throw error("No Hall Id found");
-//         const hall = await halls.find(Hall_ID)
-//         res.status(200).json(hall)
-//     } catch (err) {
-//         res.status(400).json({
-//             status: 'Failed',
-//             message: err
-//         })
-//     }
-// }
 
 export const getHall = async (req, res) => {
     try {
@@ -69,6 +55,8 @@ export const getAllHalls = async (req, res) => {
         const hallsList = await halls.find(params)
         res.status(200).json(hallsList)
     } catch (err) {
+        console.log("err: ", err);
+        
         res.status(400).json({
             status: 'Failed',
             message: err

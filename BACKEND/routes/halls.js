@@ -19,7 +19,9 @@ router.post("/", protectAdminRoutes, createHall);
 router.get("/", getHall);
 
 // GET ALL Halls - Admin only
-router.get("/getAllHalls", protectAdminRoutes, getAllHalls);
+// router.get("/getAllHalls", protectAdminRoutes, getAllHalls);
+router.get("/getAllHalls", getAllHalls);
+
 
 // UPDATE Hall - Admin only
 router.put("/updateHall/:id", protectAdminRoutes, updateHall);

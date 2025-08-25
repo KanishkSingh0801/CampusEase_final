@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import User from "../models/AdminModel.js";
 
 export const protectAdminRoutes = async (req, res, next) => {
+  console.log("Admin route protection middleware activated.");
+
   let token;
 
   // Check if token exists in the Authorization header
@@ -27,6 +29,8 @@ export const protectAdminRoutes = async (req, res, next) => {
       // Proceed to the next middleware or route handler
       next();
     } catch (error) {
+      console.log("Error in admin verification:", error);
+
       // Handle any errors related to JWT verification
       res.status(401).json({
         msg: "Not authorized, token invalid or expired.",
@@ -36,6 +40,7 @@ export const protectAdminRoutes = async (req, res, next) => {
 
   // If no token is provided
   if (!token) {
+    console.log("No token provided for admin verification.");
     res.status(401).json({
       msg: "Not authorized, token required.",
     });
